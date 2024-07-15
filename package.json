@@ -3,7 +3,7 @@
   "version": "1.0.136",
   "description": "",
   "main": "lib/index.js",
-  "repository": "https://github.com/ravihamsa/react-starter-components",
+  "repository": "https://github.com/ravi-pim-unbxd/react-starter-components",
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "bluebird": "^3.4.1",
