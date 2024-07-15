@@ -4,17 +4,17 @@ react-starter-components
 
 # setup
 
-`npm install react-starter-components`
+`npm install netcore-react-starter-components`
 
 # alternative setup
 
-Use yoeman generator https://www.npmjs.com/package/generator-react-starter-app
+Use yoeman generator https://www.npmjs.com/package/netcore-react-starter-components
 
 
 # usage
 
 ```js
-import {SmartWrapper, RXForm} from 'react-starter-components';
+import {SmartWrapper, RXForm} from 'netcore-react-starter-components';
 
 ```
 
