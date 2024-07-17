@@ -1,16 +1,16 @@
 /**
  * Created by ravi.hamsa on 3/26/17.
  */
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import RXSelectionElement from './RXSelectionElement';
 import List from '../common/List';
-import {InlineModal, InlineModalBody, InlineModalButton} from '../common/InlineModalGroup';
-import {_} from '../../core/utils';
+import { InlineModal, InlineModalBody, InlineModalButton } from '../common/InlineModalGroup';
+import { _ } from '../../core/utils';
 
 export class RXDropdownItem extends Component {
 
     getClassName() {
-        const {itemData, selectionManager} = this.props;
+        const { itemData, selectionManager } = this.props;
         let className = 'list-item ';
         if (selectionManager.isSelected(itemData)) {
             className += ' active';
@@ -19,7 +19,7 @@ export class RXDropdownItem extends Component {
     }
 
     deselectItem() {
-        const {itemData, selectionManager} = this.props;
+        const { itemData, selectionManager } = this.props;
         selectionManager.deselect(itemData);
     }
 
@@ -31,15 +31,19 @@ export class RXDropdownItem extends Component {
     render() {
         const itemData = this.props.itemData;
         const className = this.getClassName();
-	    const {idAttribute} = this.props;
-        return <li data-id={itemData[idAttribute]} className={className}>
+        const { idAttribute } = this.props;
+        return <li
+            data-id={itemData[idAttribute]}
+            className={className}
+            title={itemData.name}
+        >
             {itemData.name}
         </li>;
     }
 }
 
 RXDropdownItem.defaultProps = {
-	idAttribute:'id'
+    idAttribute: 'id'
 }
 
 export default class RXDropdown extends RXSelectionElement {
@@ -59,7 +63,7 @@ export default class RXDropdown extends RXSelectionElement {
     }
 
     getSummaryText() {
-        const {selectionManager, multiSelect} = this;
+        const { selectionManager, multiSelect } = this;
         const options = this.getOptions();
         if (options === undefined || options.length === 0) {
             return this.props.noOptionsLabel;
@@ -106,7 +110,7 @@ export default class RXDropdown extends RXSelectionElement {
     }
 
     renderElement() {
-        const {valign = 'top', bodyPosition, ListItem = RXDropdownItem, listBodyClassName = 'drop-down-body', useButtonWidth, idAttribute} = this.props;
+        const { valign = 'top', bodyPosition, ListItem = RXDropdownItem, listBodyClassName = 'drop-down-body', useButtonWidth, idAttribute } = this.props;
         const filteredOptions = this.getFilteredOptions();
 
         return <InlineModal ref={inlinePopup => this.ref_inlinePopup = inlinePopup} disabled={this.props.disabled}>
@@ -118,11 +122,11 @@ export default class RXDropdown extends RXSelectionElement {
                     {this.props.showSearch ? <div className="drop-down-search-container">
                         <input type="text" autoFocus defaultValue={this.state.query} ref={searchBox => this.ref_searchBox = searchBox}
                             onChange={this.onKeyPressHandler} className="drop-down-input"
-                            placeholder={this.props.placeholder}/>
+                            placeholder={this.props.placeholder} />
                     </div> : null}
                     <div onClick={this.onClickHandler.bind(this)} ref={listRoot => this.ref_listRoot = listRoot}>
                         <List items={filteredOptions} selectionManager={this.selectionManager}
-                            selection={this.state.value} ListItem={ListItem} idAttribute={idAttribute}/>
+                            selection={this.state.value} ListItem={ListItem} idAttribute={idAttribute} />
                     </div>
                 </div>
             </InlineModalBody>
@@ -141,7 +145,7 @@ RXDropdown.defaultProps = {
     allSelectedLabel: 'All Selected',
     optionsSelectedLabel: 'Options Selected',
     bodyPosition: 'down',
-    useButtonWidth:true,
-    listBodyClassName:'inline-popup-body-fullwidth'
+    useButtonWidth: true,
+    listBodyClassName: 'inline-popup-body-fullwidth'
 };
 
