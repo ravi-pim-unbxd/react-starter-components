@@ -36,6 +36,7 @@ export class RXSelectionItem extends Component {
     render() {
         const itemData = this.props.itemData;
         const className = this.getClassName();
+        console.log('I am RxSelectionElement');
         const { idAttribute } = this.props;
         return <li
             data-id={itemData[idAttribute]}

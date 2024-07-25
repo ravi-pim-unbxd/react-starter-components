@@ -1,8 +1,8 @@
 /**
  * Created by ravi.hamsa on 3/26/17.
  */
-import React, {Component} from 'react';
-import {_, getDomProps} from '../../core/utils';
+import React, { Component } from 'react';
+import { _, getDomProps } from '../../core/utils';
 import SimpleElement from './SimpleElement';
 import Selection from 'selection-manager';
 import List from '../../components/common/List';
@@ -10,7 +10,7 @@ import List from '../../components/common/List';
 export class SelectionItem extends Component {
 
     getClassName() {
-        const {itemData, selectionManager} = this.props;
+        const { itemData, selectionManager } = this.props;
         let className = 'list-item ';
         if (selectionManager.isSelected(itemData)) {
             className += ' active';
@@ -19,7 +19,7 @@ export class SelectionItem extends Component {
     }
 
     deselectItem() {
-        const {itemData, selectionManager} = this.props;
+        const { itemData, selectionManager } = this.props;
         selectionManager.deselect(itemData);
     }
 
@@ -31,7 +31,12 @@ export class SelectionItem extends Component {
     render() {
         const itemData = this.props.itemData;
         const className = this.getClassName();
-        return <li data-id={itemData.id} className={className}>
+        console.log('I am SimpleSelectionElement');
+        return <li
+            data-id={itemData.id}
+            className={className}
+            title={itemData.name}
+        >
             {itemData.name}
         </li>;
     }
@@ -127,7 +132,7 @@ export default class SimpleSelectionElement extends SimpleElement {
     }
 
     getFilteredOptions() {
-        const {filterQuery = '', filterField = 'name'} = this.props;
+        const { filterQuery = '', filterField = 'name' } = this.props;
         const options = this.getOptions();
         const filterdOptions = options.filter(item => item[filterField].toLowerCase().indexOf(filterQuery.toLowerCase()) > -1);
         console.log(this.props.name, filterdOptions);
@@ -159,7 +164,7 @@ export default class SimpleSelectionElement extends SimpleElement {
 
     selectById(value) {
         const options = this.getOptions();
-        const {selectionManager} = this;
+        const { selectionManager } = this;
         const toSelectItem = _.find(options, item => item.id === value);
         if (toSelectItem) {
             if (this.multiSelect) {
@@ -220,13 +225,13 @@ export default class SimpleSelectionElement extends SimpleElement {
     readInputValue() {
         let selection = this.getFormattedSelection();
         if (selection === '' && this.props.selectDefaultFirst) {
-            const {options} = this.props;
+            const { options } = this.props;
             if (options && options.length > 0) {
                 this.selectionManager.select(options[0]);
                 selection = this.getFormattedSelection();
             }
         }
-        const {exposeSelection, exposeName} = this.props;
+        const { exposeSelection, exposeName } = this.props;
         if (exposeSelection || exposeName) {
             this.exposeNameAndSelection();
         }
@@ -235,7 +240,7 @@ export default class SimpleSelectionElement extends SimpleElement {
     }
 
     exposeNameAndSelection() {
-        const {exposeSelection, name} = this.props;
+        const { exposeSelection, name } = this.props;
         const selected = this.selectionManager.getSelected();
         if (exposeSelection) {
             this.context.collector.mutedUpdateValue(`${name}_selection`, selected);
@@ -245,11 +250,11 @@ export default class SimpleSelectionElement extends SimpleElement {
     render() {
         const domProps = getDomProps(this.props);
         domProps.className = this.getClassNames();
-        const {ListItem = SelectionItem} = this.props;
+        const { ListItem = SelectionItem } = this.props;
         const selected = this.selectionManager.getSelected();
         return <div {...domProps} onClick={this.onClickHandler.bind(this)} ref={element => this.ref_listRoot = element}>
             <List items={this.getFilteredOptions()} selectionManager={this.selectionManager} selection={selected}
-			      ListItem={ListItem}/>
+                ListItem={ListItem} />
         </div>;
     }
 }

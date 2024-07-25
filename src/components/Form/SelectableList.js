@@ -33,7 +33,12 @@ export class SelectableListItem extends Component {
     render() {
         let itemData = this.props.itemData;
         let className = this.getClassName();
-        return <li data-id={itemData.id} className={className}>
+        console.log('I am SelectableList');
+        return <li
+            data-id={itemData.id}
+            className={className}
+            title={itemData.name}
+        >
             {itemData.name}
         </li>;
 

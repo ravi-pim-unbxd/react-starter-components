@@ -31,7 +31,12 @@ export class SimpleDropdownItem extends Component {
     render() {
         const itemData = this.props.itemData;
         const className = this.getClassName();
-        return <li data-id={itemData.id} className={className}>
+        console.log('I am SimpleDropdown');
+        return <li
+            data-id={itemData.id}
+            className={className}
+            title={itemData.name}
+        >
             {itemData.name}
         </li>;
     }
